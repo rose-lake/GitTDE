@@ -12,6 +12,10 @@ For general daily use I like `git log --oneline -N` the best...
 - `git checkout -b <new-branch-name>` -- creates the new branch and moves you there
 Note that `git branch` and `git checkout -b` will create an identical clone from _where you are now_ in the commit history of the current branch. This is useful knowledge when you are trying to debug something!
 
+# What have I changed?
+- `git diff` -- what hasn't been staged or committed?
+- `git diff --cached` or `git diff --staged` -- diff between staging area and HEAD
+
 # MDE-specific tips and tricks
 
 ## Rolling back to a prior state
