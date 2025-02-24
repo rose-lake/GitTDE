@@ -63,3 +63,9 @@ Mostly, I use `git reset --hard` for rollback scenarios such as the one describe
 
 On the other hand, `git reset --soft` is a great way to do some rebasing locally, without having to dive into `git rebase -i`! I really liked this Stack Overflow answer which gave me that insight -- [Use Case - Combine a series of local commits](https://stackoverflow.com/a/26172014)
 
+# `rebase -i`
+I really can't say it better than this:
+> And then there’s `git rebase --interactive`, which is a bit like `git commit --amend` hopped up on acid and holding a chainsaw - completely insane and quite dangerous but capable of exposing entirely new states of mind. Here you can edit, squash, reorder, tease apart, and annotate existing commits in a way that’s easier and more intuitive than it ought to be.
+> source: https://tomayko.com/blog/2008/the-thing-about-git
+
+However, that said, `git rebase -i` can actually be fun. See the [documentation](https://git-scm.com/docs/git-rebase) but really, the best way to learn it is by doing: just run `git rebase -i` and follow the on-screen commands and explanations.
