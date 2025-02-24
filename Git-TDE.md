@@ -1,3 +1,9 @@
+# Mirror mirror...
+- `git branch <new branch name>` -- creates the new branch but you stay where you are
+- `git checkout <the-branch>` -- moves you to the branch you requested
+- `git checkout -b <new-branch-name>` -- creates the new branch and moves you there
+Note that `git branch` and `git checkout -b` will create an identical clone from _where you are now_ in the commit history of the current branch. This is useful knowledge when you are trying to debug something!
+
 # Where am I?
 - `git log` -- a more detailed point of view is useful sometimes!
 - `git log -N` -- show the last N commits
@@ -5,12 +11,6 @@
 - `git log --oneline -N` -- oneline is really useful, with helpful colorization at least in Git Bash
 - `git log --oneline --decorate --all --graph` -- the kitchen sink!
 For general daily use I like `git log --oneline -N` the best...
-
-# Mirror mirror...
-- `git branch <new branch name>` -- creates the new branch but you stay where you are
-- `git checkout <the-branch>` -- moves you to the branch you requested
-- `git checkout -b <new-branch-name>` -- creates the new branch and moves you there
-Note that `git branch` and `git checkout -b` will create an identical clone from _where you are now_ in the commit history of the current branch. This is useful knowledge when you are trying to debug something!
 
 # Who am I?
 - `git branch`
@@ -78,7 +78,7 @@ This is one of my favorte "magical Git incantations" of all time. I learned it f
 
 The way I use it is to roll back by state (on my current branch) to the roll-back-ref which is a prior commit (on my current branch). Scanning through the Git manual on this command indicates it is generally used for much more complex use-cases than this. But here we're keeping it super simple, and just using its "magical powers" for rolling back while actually moving forward...
 
-# Some additional details
+# A few extra details
 
 ## A few `git reset` varieties
 - `git reset --soft`
