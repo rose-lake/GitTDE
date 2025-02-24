@@ -33,6 +33,18 @@ From that point forward you can just `git push` and don't have to worry about `-
 - `git commit -m "your-commit-message"`
 - `git commit -am "your commit message"` -- the `-a` automatically stages and commits, but this only works if the file in question has already been initially committed, this doesn't pick up new files. The way you can tell is by looking at `git diff` versus `git status`. But please note that the `-a` option does pick up deleted files.
 
+## Oops! I forgot something!...
+
+### Just for the prior commit
+When you need to add something to the commit you just made... _If that commit hasn't yet been pushed to remote_, then you're in luck. Just stage the stuff you want to add to your just prior commit, and do:
+- `git commit --amend --no-edit` -- if you want to leave the commit message the same
+- `git commit --amend -m "your new commit message"` -- if you want to change the commit message
+- optionally include `-a` if it's just modifications to existing files, but remember new files need their own explicit `git add`, first!
+
+### For something longer ago than that...
+Lots of options exist, but the question becomes: Is it worth it? How important is it that the thing you forgot get melded in with that earlier commit you have in mind? This is because "rewriting history" isn't allowed by the MDE BitBucket pre-commit hooks, so you'd have to engage in some workaround, described below...
+If you decide it's not worth the extra trouble of getting around the "you can't rewrite history" rule, then just make a new commit with the change you forgot... It's okay... We all end up with messy commit histories, unless we use `git rebase -i` on the regular...
+
 # MDE-specific tips and tricks
 
 ## Rolling back to a prior state
