@@ -33,6 +33,11 @@ From that point forward you can just `git push` and don't have to worry about `-
 - `git commit -m "your-commit-message"`
 - `git commit -am "your commit message"` -- the `-a` automatically stages and commits, but this only works if the file in question has already been initially committed, this doesn't pick up new files. The way you can tell is by looking at `git diff` versus `git status`. But please note that the `-a` option does pick up deleted files.
 
+## Untangling a working tree into atomic commits
+Suppose you've been working away on your local branch and when it comes time to commit, you realize you have several unrelated changes all living together in your currnet working copy. How to untangle things into atomic commits? The patch option is super helpful for stashing or staging just part of your WIP working tree!
+- `git stash -p -m "your stash message"` (then, later, you unstash the rest and commit it, too)
+- `git add -p`
+
 ## Oops! I forgot something!...
 
 ### Just for the prior commit
@@ -45,10 +50,15 @@ When you need to add something to the commit you just made... _If that commit ha
 Lots of options exist, but the question becomes: Is it worth it? How important is it that the thing you forgot get melded in with that earlier commit you have in mind? This is because "rewriting history" isn't allowed by the MDE BitBucket pre-commit hooks, so you'd have to engage in some workaround, described below...
 If you decide it's not worth the extra trouble of getting around the "you can't rewrite history" rule, then just make a new commit with the change you forgot... It's okay... We all end up with messy commit histories, unless we use `git rebase -i` on the regular...
 
-# MDE-specific tips and tricks
+# Some MDE-specific tips and tricks
+
+## I just pushed put the commit isn't showing up in my PR!
+I've seen this happen more than once with Bitbucket. You push a commit. You know you did. It shows up under the commits for the branch. But it's not showing up in the PR. You can't "re-push" an already pushed commit, so how to get the PR to update, especially if, say, it was the last commit in the workflow, like putting in a tag, or a versioning commit, and you have nothing else to "say" on that branch. In that case, you can just push an empty commit. Here's the "magical incancation" for that: 
+- `git commit --allow-empty -m "Pushing an empty commit so that the prior commits will show up in the PR"`
+As a courtesy, it's nice to write a descriptive commit message explaining why you are pushing this empty commit...
 
 ## Rolling back to a prior state
-Bitbucket has custom hooks (required by MDE) which prevent the rewriting of history. This is annoying at times, but you always have options for working around it...
+Bitbucket has custom pre-commit hooks (required by MDE) which prevent the rewriting of history. This is annoying at times, but you always have options for working around it...
 
 ### Work around it locally, then push
 One of the quickest and simplest ways to "roll back" to an arbitrary prior commit or tag is to use any variation of of `git reset` that you prefer. For a good explanation of git reset, see https://www.gitkraken.com/learn/git/git-reset.
@@ -68,7 +78,9 @@ This is one of my favorte "magical Git incantations" of all time. I learned it f
 
 The way I use it is to roll back by state (on my current branch) to the roll-back-ref which is a prior commit (on my current branch). Scanning through the Git manual on this command indicates it is generally used for much more complex use-cases than this. But here we're keeping it super simple, and just using its "magical powers" for rolling back while actually moving forward...
 
-### More detail on a few `git reset` varieties
+# Some additional details
+
+## A few `git reset` varieties
 - `git reset --soft`
     - say you have some changes in your working tree
     - and you run git reset --soft
@@ -92,9 +104,13 @@ Mostly, I use `git reset --hard` for rollback scenarios such as the one describe
 
 On the other hand, `git reset --soft` is a great way to do some rebasing locally, without having to dive into `git rebase -i`! I really liked this Stack Overflow answer which gave me that insight -- [Use Case - Combine a series of local commits](https://stackoverflow.com/a/26172014)
 
-# Rebasing -- `git rebase -i`
+## Rebasing -- `git rebase -i`
 I really can't say it better than this:
 > And then there’s `git rebase --interactive`, which is a bit like `git commit --amend` hopped up on acid and holding a chainsaw - completely insane and quite dangerous but capable of exposing entirely new states of mind. Here you can edit, squash, reorder, tease apart, and annotate existing commits in a way that’s easier and more intuitive than it ought to be.
 > source: https://tomayko.com/blog/2008/the-thing-about-git
 
 However, that said, `git rebase -i` can actually be lots of fun and quite instructive. See the [documentation](https://git-scm.com/docs/git-rebase) but really, the best way to learn it is by doing: just run `git rebase -i` and follow the on-screen commands and explanations.
+
+## Stashing
+- `git stash` is a handy tool especially when used with `--patch` (`-p`) for stashing away just part of your working tree, and untangling a messy WIP situation into discrete, atomic commits.
+- This is still one of my favorite `git stash` primers -- https://www.freecodecamp.org/news/git-stash-commands/ -- it tells you all the basic stuff you need to know to start using `git stash` with confidence
