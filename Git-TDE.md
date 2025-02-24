@@ -12,6 +12,16 @@ For general daily use I like `git log --oneline -N` the best...
 - `git checkout -b <new-branch-name>` -- creates the new branch and moves you there
 Note that `git branch` and `git checkout -b` will create an identical clone from _where you are now_ in the commit history of the current branch. This is useful knowledge when you are trying to debug something!
 
+# Who am I?
+- `git branch`
+- `git branch -vv` -- so great, shows remote/upstream/tracking branch
+- `git branch -avv` -- overwhelming, but informative
+The shortest/easiest way to grab a branch you see on remote (with `-a`) but don't have locally:
+- `git checkout <the-name-of-the-remote-branch-minus-origin-slash>`
+The easiest way to push a branch that exists only locally to your remote and ensure it's tracked there is:
+- `git push -u origin <the-name-of-my-local-branch-not-yet-tracked-on-remote>`
+From that point forward you can just `git push` and don't have to worry about `-u` (`--set-upstream`) nonsense.
+
 # What have I changed?
 - `git diff` -- what hasn't been staged or committed?
 - `git diff --cached` or `git diff --staged` -- diff between staging area and HEAD
@@ -63,9 +73,9 @@ Mostly, I use `git reset --hard` for rollback scenarios such as the one describe
 
 On the other hand, `git reset --soft` is a great way to do some rebasing locally, without having to dive into `git rebase -i`! I really liked this Stack Overflow answer which gave me that insight -- [Use Case - Combine a series of local commits](https://stackoverflow.com/a/26172014)
 
-# `rebase -i`
+# Rebasing -- `git rebase -i`
 I really can't say it better than this:
 > And then there’s `git rebase --interactive`, which is a bit like `git commit --amend` hopped up on acid and holding a chainsaw - completely insane and quite dangerous but capable of exposing entirely new states of mind. Here you can edit, squash, reorder, tease apart, and annotate existing commits in a way that’s easier and more intuitive than it ought to be.
 > source: https://tomayko.com/blog/2008/the-thing-about-git
 
-However, that said, `git rebase -i` can actually be fun. See the [documentation](https://git-scm.com/docs/git-rebase) but really, the best way to learn it is by doing: just run `git rebase -i` and follow the on-screen commands and explanations.
+However, that said, `git rebase -i` can actually be lots of fun and quite instructive. See the [documentation](https://git-scm.com/docs/git-rebase) but really, the best way to learn it is by doing: just run `git rebase -i` and follow the on-screen commands and explanations.
