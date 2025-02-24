@@ -52,7 +52,7 @@ If you decide it's not worth the extra trouble of getting around the "you can't 
 
 # Some MDE-specific tips and tricks
 
-## I just pushed put the commit isn't showing up in my PR!
+## I just pushed but the commit isn't showing up in my PR!
 I've seen this happen more than once with Bitbucket. You push a commit. You know you did. It shows up under the commits for the branch. But it's not showing up in the PR. You can't "re-push" an already pushed commit, so how to get the PR to update, especially if, say, it was the last commit in the workflow, like putting in a tag, or a versioning commit, and you have nothing else to "say" on that branch. In that case, you can just push an empty commit. Here's the "magical incancation" for that: 
 - `git commit --allow-empty -m "Pushing an empty commit so that the prior commits will show up in the PR"`
 As a courtesy, it's nice to write a descriptive commit message explaining why you are pushing this empty commit...
