@@ -23,8 +23,15 @@ The easiest way to push a branch that exists only locally to your remote and ens
 From that point forward you can just `git push` and don't have to worry about `-u` (`--set-upstream`) nonsense.
 
 # What have I changed?
-- `git diff` -- what hasn't been staged or committed?
+- `git status` -- shows stuff git does / doesn't know about -- reminds you to add new files!
+- `git diff` -- what's stuff that git already knows about, but hasn't been staged or committed?
 - `git diff --cached` or `git diff --staged` -- diff between staging area and HEAD
+
+# Making it official...
+- `git add <file-path>`
+- `git add .`
+- `git commit -m "your-commit-message"`
+- `git commit -am "your commit message"` -- the `-a` automatically stages and commits, but this only works if the file in question has already been initially committed, this doesn't pick up new files. The way you can tell is by looking at `git diff` versus `git status`. But please note that the `-a` option does pick up deleted files.
 
 # MDE-specific tips and tricks
 
