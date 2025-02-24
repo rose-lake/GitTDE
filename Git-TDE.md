@@ -34,3 +34,5 @@ You have just successfully rewritten history. The same process can work for any 
 This is one of my favorte "magical Git incantations" of all time. I learned it from Eli Zukowski. It works. It basically "rolls back" your state but does so by moving forwards in time (with a new commit), not backwards like with the `git reset` variations. No commits are removed.
 
 The way I use it is to roll back by state (on my current branch) to the roll-back-ref which is a prior commit (on my current branch). Scanning through the Git manual on this command indicates it is generally used for much more complex use-cases than this. But here we're keeping it super simple, and just using its "magical powers" for rolling back while actually moving forward...
+
+One
