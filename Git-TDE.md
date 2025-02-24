@@ -38,3 +38,28 @@ You have just successfully rewritten history. The same process can work for any 
 This is one of my favorte "magical Git incantations" of all time. I learned it from Eli Zukowski. It works. It basically "rolls back" your state but does so by moving forwards in time (with a new commit), not backwards like with the `git reset` variations. No commits are removed. Running the command will stage (but not commit) all the changes involved in the rollback.
 
 The way I use it is to roll back by state (on my current branch) to the roll-back-ref which is a prior commit (on my current branch). Scanning through the Git manual on this command indicates it is generally used for much more complex use-cases than this. But here we're keeping it super simple, and just using its "magical powers" for rolling back while actually moving forward...
+
+### More detail on a few `git reset` varieties
+- `git reset --soft`
+    - say you have some changes in your working tree
+    - and you run git reset --soft
+    - the 'rollback' changes will drop into the staged area (e.g. appear green in your git status)
+    - your working tree changes will stay in your working tree (e.g. appear red in your git status)
+    - this is super handy! and neat!
+- `git reset --hard`
+    - everything between you and the ref you're rolling back is now gone
+    - nothing is staged
+    - nothing in the working tree
+    - just an empty working tree and staging area, and HEAD rolled back to the ref you asked for
+    - poof, everything is gone
+- `git reset --mixed`
+    - similar to `git reset --soft` except that everything drops into the working tree, nothing is staged
+    - say you alreayd had changes in your working tree
+    - then you run `git reset --mixed`
+    - everything drops into the working tree (e.g. appears red in the git status)
+    - any local changes you had going are now have the rollback changes mixed in
+
+Mostly, I use `git reset --hard` for rollback scenarios such as the one described above. In those cases I know exactly what I need and I'm not worried about "losing" stuff b/c everything is on remote, and/or I just created a new mirror branch locally, so nothing is ever actually 'lost'. However, if you don't have your branch mirrored locally or pushed to remote, then be careful with `git reset --hard`.
+
+On the other hand, `git reset --soft` is a great way to do some rebasing locally, without having to dive into `git rebase -i`! I really liked this Stack Overflow answer which gave me that insight -- [Use Case - Combine a series of local commits](https://stackoverflow.com/a/26172014)
+
